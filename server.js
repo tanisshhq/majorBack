@@ -1,19 +1,31 @@
-const express = require("express")
-const app = express()
-const cors = require("cors")
-require("dotenv").config()
-const connectDB = require("./config/db")
-const PORT = process.env.PORT || 5000
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
 
-// middlewares
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+dotenv.config();
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Connect to MongoDB
+connectDB();
+
+// CORS Configuration
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "http://localhost:3000", // Replace with your frontend URL
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true, // Allow cookies & auth headers
+};
+app.use(cors(corsOptions));
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-// connect to the mongodb database
-connectDB() 
+// Routes
+app.use("/api/items", require("./routes/items"));
+app.use("/api/payment", require("./routes/payment"));
 
-app.use('/api/items', require("./routes/items"))
-app.use('/api/payment', cors(), require("./routes/payment"))
-
-app.listen(PORT, console.log("Server is running on port ", PORT))
+// Start Server
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

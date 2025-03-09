@@ -1,4 +1,7 @@
-{
+
+"scripts": {
+  "start": "node index.js"
+}{
   "name": "Shema Server",
   "version": "1.0.0",
   "description": "Test Server for SHEMA",
