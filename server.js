@@ -12,7 +12,7 @@ connectDB();
 
 // CORS Configuration
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:3000", // Replace with your frontend URL
+  origin: process.env.REACT_APP_API_URL || "http://localhost:3000", // Replace with your frontend URL
   methods: "GET,POST,PUT,DELETE",
   credentials: true, // Allow cookies & auth headers
 };
