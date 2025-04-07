@@ -12,7 +12,7 @@ const initializePayment = async (req, res) => {
     }
 
     // chapa redirect you to this url when payment is successful
-    const CALLBACK_URL = "http://localhost:3000"
+    const CALLBACK_URL = "https://majorback.onrender.com"
 
     // a unique reference given to every transaction
     const TEXT_REF = "tx-myecommerce12345-" + Date.now()
